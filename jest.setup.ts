@@ -1,4 +1,3 @@
-import '@testing-library/jest-native/extend-expect';
 import 'react-native-get-random-values';
 
 jest.mock('@react-native-async-storage/async-storage', () =>

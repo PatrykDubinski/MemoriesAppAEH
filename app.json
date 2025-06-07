@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "FeatureRichApp",
-    "slug": "FeatureRichApp",
+    "name": "MemoriesApp",
+    "slug": "MemoriesApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

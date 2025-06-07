@@ -51,6 +51,7 @@ export const saveNote = async (
     let newOrUpdatedNote: Note;
 
     if (noteData.id) {
+      console.log(notes)
       const noteIndex = notes.findIndex(n => n.id === noteData.id);
       if (noteIndex === -1) {
         throw new Error('Note not found for update.');

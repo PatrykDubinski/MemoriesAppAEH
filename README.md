@@ -1,6 +1,6 @@
-# FeatureRichNotesApp
+# MemoriesApp
 
-Prosta aplikacja do notatek stworzona w React Native (z Expo) jako demonstracja spełnienia 14 kluczowych wymagań projektowych dla aplikacji mobilnych.
+Prosta aplikacja do zapisywania wspomnień stworzona w React Native (z Expo).
 
 ## Spis Treści
 
@@ -18,7 +18,7 @@ Prosta aplikacja do notatek stworzona w React Native (z Expo) jako demonstracja 
 
 ## Opis Projektu
 
-`FeatureRichNotesApp` to aplikacja mobilna umożliwiająca tworzenie, przeglądanie, edycję i usuwanie notatek. Została zaprojektowana z myślą o pokazaniu dobrych praktyk w tworzeniu aplikacji React Native, w tym zarządzania stanem, nawigacji, responsywności, integracji z funkcjami natywnymi, testowania i bezpieczeństwa.
+`MemoriesApp` to aplikacja mobilna umożliwiająca tworzenie, przeglądanie, edycję i usuwanie wspomnień. Została zaprojektowana z myślą o pokazaniu dobrych praktyk w tworzeniu aplikacji React Native, w tym zarządzania stanem, nawigacji, responsywności, integracji z funkcjami natywnymi, testowania i bezpieczeństwa.
 
 ## Wymagania Projektowe i Ich Realizacja
 
@@ -33,8 +33,8 @@ Poniżej znajduje się lista 14 wymagań projektowych wraz z opisem ich realizac
 2.  **Obsługa różnych rozmiarów i orientacji ekranu**
     *   **Realizacja:**
         *   Użycie **Flexbox** do budowy layoutów responsywnych (np. w `HomeScreen`, `NoteScreen`).
-        *   Stosowanie względnych jednostek i dynamicznych stylów w komponentach.
-        *   Hook `useScreenDimensions` (`src/hooks/useResponsive.ts`) do potencjalnego dostosowywania UI w zależności od wymiarów ekranu (choć w tej prostej aplikacji nie jest intensywnie wykorzystywany, stanowi przykład).
+        *   Stosowanie dynamicznych stylów w komponentach.
+        *   Hook `useScreenDimensions` (`src/hooks/useResponsive.ts`) do potencjalnego dostosowywania UI w zależności od wymiarów ekranu
         *   Komponent `KeyboardAvoidingView` w `NoteScreen` dla lepszego UX przy wprowadzaniu tekstu.
 
 3.  **Jakość kodu (ESLint, Prettier, TypeScript)**
@@ -65,7 +65,6 @@ Poniżej znajduje się lista 14 wymagań projektowych wraz z opisem ich realizac
         2.  **Geolokalizacja (`expo-location`):**
             *   Funkcja dodawania aktualnej lokalizacji do notatki w `NoteScreen.tsx` przy użyciu `LocationService.ts`.
             *   Obsługa prośby o uprawnienia.
-        *   *(Opcjonalnie można by dodać Expo Notifications lub Camera jako kolejne przykłady).*
 
 7.  **Zarządzanie asynchronicznymi operacjami (async/await, Promises)**
     *   **Realizacja:**
@@ -143,5 +142,3 @@ Poniżej znajduje się lista 14 wymagań projektowych wraz z opisem ich realizac
 *   Przełączanie motywu aplikacji (jasny/ciemny).
 *   Responsywny interfejs użytkownika.
 *   Obsługa błędów i informowanie użytkownika.
-
-## Struktura Projektu
