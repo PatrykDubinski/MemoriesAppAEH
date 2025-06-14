@@ -23,6 +23,7 @@ export const getNotes = async (): Promise<Note[]> => {
   try {
     const jsonValue = await AsyncStorage.getItem(NOTES_KEY);
     const notes: Note[] = jsonValue != null ? JSON.parse(jsonValue) : [];
+    // Właściwie sortowanie jest niepotrzebne. W idealnym przypadku dane powinny być posortowane z backendu.
     return notes.sort(
       (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
     );
@@ -61,6 +62,7 @@ export const saveNote = async (
         title: noteData.title,
         content: noteData.content,
         location: noteData.location,
+        imageUri: noteData.imageUri,
         updatedAt: now,
       };
       notes[noteIndex] = newOrUpdatedNote;
@@ -70,6 +72,7 @@ export const saveNote = async (
         title: noteData.title,
         content: noteData.content,
         location: noteData.location,
+        imageUri: noteData.imageUri,
         createdAt: now,
         updatedAt: now,
       };
