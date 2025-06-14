@@ -112,13 +112,13 @@ Poniżej znajduje się lista 14 wymagań projektowych wraz z opisem ich realizac
     *   **Realizacja:**
         *   Notatki i preferencje motywu są przechowywane lokalnie za pomocą `AsyncStorage`.
         *   Aplikacja jest w pełni funkcjonalna offline w zakresie przeglądania, tworzenia, edycji i usuwania notatek.
-        *   **Synchronizacja:** W tej prostej aplikacji nie ma backendu, więc nie ma mechanizmu synchronizacji danych z serwerem. Wszystkie dane są tylko lokalne. W przypadku aplikacji z backendem, należałoby zaimplementować logikę wykrywania połączenia i wysyłania/odbierania zmian.
+        *   **Synchronizacja:** W tej prostej aplikacji nie ma backendu, więc nie ma mechanizmu synchronizacji danych z serwerem. Wszystkie dane są tylko lokalne.
 
 14. **Bezpieczeństwo**
     *   **Realizacja:**
         *   **Przechowywanie danych:** Wrażliwe dane (w tej aplikacji nie ma ich wiele, ale np. tokeny w bardziej złożonej) powinny być przechowywane za pomocą `expo-secure-store`. `AsyncStorage` jest używany do danych niewrażliwych.
         *   **Walidacja danych wejściowych:** Prosta walidacja po stronie klienta w `NoteScreen` (tytuł i treść nie mogą być puste). W aplikacji z backendem kluczowa jest walidacja serwerowa.
-        *   **HTTPS:** (Nie dotyczy bezpośrednio, bo nie ma zapytań do zewnętrznego API). W przypadku komunikacji z API, należy używać HTTPS.
+        *   **HTTPS:** W przypadku komunikacji z API, w tej aplikacji jest to tylko przykładowe placeholder API, należy używać HTTPS.
         *   **Uprawnienia:** Aplikacja prosi o uprawnienia do lokalizacji tylko wtedy, gdy użytkownik inicjuje akcję pobrania lokalizacji.
 
 ## Użyte Technologie
@@ -131,7 +131,6 @@ Poniżej znajduje się lista 14 wymagań projektowych wraz z opisem ich realizac
 *   **Expo Location**: Dostęp do geolokalizacji.
 *   **Jest & React Native Testing Library**: Testowanie.
 *   **ESLint & Prettier**: Jakość i formatowanie kodu.
-*   **Styled Components (opcjonalnie)**: (W tej wersji użyto `StyleSheet`).
 *   **UUID**: Generowanie unikalnych ID dla notatek.
 
 ## Funkcjonalności Aplikacji
