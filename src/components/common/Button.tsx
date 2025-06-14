@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import {
   TouchableOpacity,
   Text,
@@ -20,7 +20,7 @@ interface ButtonProps {
   icon?: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   title,
   onPress,
   style,
@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
   loading = false,
   variant = 'primary',
   icon,
-}) => {
+}: ButtonProps): JSX.Element => {
   const theme = useAppTheme();
 
   const getButtonColors = () => {

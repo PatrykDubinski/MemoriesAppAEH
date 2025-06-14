@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { View, ActivityIndicator, StyleSheet, Text } from 'react-native';
 import { useAppTheme } from '@/styles/theme';
 
@@ -7,10 +7,10 @@ interface LoadingIndicatorProps {
   message?: string;
 }
 
-const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({
+const LoadingIndicator = ({
   size = 'large',
   message,
-}) => {
+}: LoadingIndicatorProps): JSX.Element => {
   const theme = useAppTheme();
   return (
     <View style={styles.container}>

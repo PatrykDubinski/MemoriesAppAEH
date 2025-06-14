@@ -4,11 +4,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import AppNavigator from '@/navigation/AppNavigator';
 import ErrorBoundary from '@/components/common/ErrorBoundary';
-import LoadingIndicator from '@/components/common/LoadingIndicator';
 import { AppProvider } from '@/contexts/AppContext';
 import { NotesProvider } from '@/contexts/NotesContext';
 import { useAppTheme } from '@/styles/theme';
 import { Text, View } from 'react-native';
+import LoadingIndicator from '@/components/common/LoadingIndicator';
 
 export default function App() {
 
@@ -29,7 +29,7 @@ const ThemedApp = () => {
     const currentTheme = useAppTheme();
   if (!currentTheme || typeof currentTheme.dark === 'undefined') {
       console.error("currentTheme object is problematic in ThemedApp:", currentTheme);
-      return <View><Text>Ładowanie motywu...</Text></View>;
+        return <LoadingIndicator message="Loading theme..." />;
     }
 
     return (

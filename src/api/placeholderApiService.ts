@@ -22,9 +22,9 @@ export const fetchSampleTodo = async (): Promise<Todo> => {
   } catch (error) {
     console.error('Error fetching sample todo:', error);
     if (axios.isAxiosError(error)) {
-      throw new Error(`Błąd API: ${error.message}`);
+      throw new Error(`API error: ${error.message}`);
     } else {
-      throw new Error('Wystąpił nieoczekiwany błąd podczas pobierania danych.');
+      throw new Error('Internal Server Error.');
     }
   }
 };

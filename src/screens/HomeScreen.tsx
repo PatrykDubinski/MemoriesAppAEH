@@ -30,7 +30,7 @@ export default function HomeScreen({ navigation }: MainTabScreenProps<'Home'>) {
   };
 
   if (isLoading && notes.length === 0) {
-    return <LoadingIndicator message="Wczytywanie notatek..." />;
+    return <LoadingIndicator message="Fetching notes..." />;
   }
 
 
@@ -38,9 +38,9 @@ export default function HomeScreen({ navigation }: MainTabScreenProps<'Home'>) {
     <View style={styles.emptyContainer}>
        {error && <ErrorDisplay message={error} onRetry={refreshNotes} />}
       <Text style={[styles.emptyText, { color: theme.colors.text }]}>
-        Nie masz jeszcze żadnych notatek.
+        You don't have any notes yet.
       </Text>
-      <Button title="Dodaj pierwszą notatkę" onPress={handleAddNote} />
+      <Button title="Add your first note" onPress={handleAddNote} />
     </View>
   );
 
@@ -57,7 +57,7 @@ export default function HomeScreen({ navigation }: MainTabScreenProps<'Home'>) {
         refreshing={isLoading}
       />
       <Button
-        title="Dodaj Notatkę"
+        title="Add note"
         onPress={handleAddNote}
         icon={<Ionicons name="add-circle-outline" size={22} color="#fff" style={{marginRight: 5}}/>}
       />

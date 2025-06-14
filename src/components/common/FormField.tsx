@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { View, Text, TextInput, StyleSheet, TextInputProps } from 'react-native';
 import { useAppTheme } from '@/styles/theme';
 
@@ -8,13 +8,13 @@ interface FormFieldProps extends TextInputProps {
   containerStyle?: object;
 }
 
-const FormField: React.FC<FormFieldProps> = ({
+const FormField = ({
   label,
   error,
   containerStyle,
   style,
   ...rest
-}) => {
+}: FormFieldProps): JSX.Element => {
   const theme = useAppTheme();
 
   return (

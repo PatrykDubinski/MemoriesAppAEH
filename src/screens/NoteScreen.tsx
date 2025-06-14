@@ -47,14 +47,14 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
         setLocation(noteToEdit.location);
         setImageUri(noteToEdit.imageUri)
       } else {
-        Alert.alert('Błąd', 'Nie znaleziono notatki.', [{ text: 'OK', onPress: () => navigation.goBack() }]);
+        Alert.alert('Error', 'Note not found.', [{ text: 'OK', onPress: () => navigation.goBack() }]);
       }
     }
   }, [noteId, isEditing, getNoteById, navigation]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: isEditing ? 'Edytuj Notatkę' : 'Nowa Notatka',
+      title: isEditing ? 'Edit note' : 'New Note',
       headerRight: () => (
         <TouchableOpacity onPress={handleSave} style={{ marginRight: 15 }} disabled={isSaving || isNotesContextLoading}>
           <Ionicons
@@ -77,7 +77,7 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
       }
 
       if (permissionResult.granted === false) {
-        Alert.alert("Brak uprawnień", `Potrzebujesz ${useCamera ? 'dostępu do kamery' : 'dostępu do galerii'}, aby dodać zdjęcie.`);
+        Alert.alert("No permissions", `You need ${useCamera ? 'camera access' : 'gallery access'}, to add a photo.`);
         setIsImageLoading(false);
         return;
       }
@@ -104,7 +104,7 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
         if (permanentUri) {
           setImageUri(permanentUri);
         } else {
-          Alert.alert("Błąd", "Nie udało się zapisać obrazka.");
+          Alert.alert("Error", "Unable to add an image.");
         }
       }
       setIsImageLoading(false);
@@ -113,12 +113,12 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
  const handleRemoveImage = async () => {
     if (imageUri) {
       Alert.alert(
-        "Usuń zdjęcie",
-        "Czy na pewno chcesz usunąć zdjęcie z tej notatki?",
+        "Remove image",
+        "Are you sure you want to remove image from this note?",
         [
-          { text: "Anuluj", style: "cancel" },
+          { text: "Cancel", style: "cancel" },
           {
-            text: "Usuń",
+            text: "Remove",
             style: "destructive",
             onPress: async () => {
               await ImageService.deleteImageFromAppDirectory(imageUri);
@@ -137,13 +137,13 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
       const currentLocation = await LocationService.getCurrentLocation();
       if (currentLocation) {
         setLocation(currentLocation);
-        Alert.alert('Sukces', 'Lokalizacja została pobrana.');
+        Alert.alert('Success', 'Location fetched successfully.');
       } else {
-        Alert.alert('Informacja', 'Nie udało się pobrać lokalizacji. Sprawdź uprawnienia.');
+        Alert.alert('Info', 'Unable to fetch your location. Check permissions.');
       }
     } catch (err: any) {
-      setError(err.message || 'Błąd podczas pobierania lokalizacji.');
-      Alert.alert('Błąd', err.message || 'Nie udało się pobrać lokalizacji.');
+      setError(err.message || 'Error during fetching your location.');
+      Alert.alert('Error', err.message || 'Unable to fetch location.');
     } finally {
       setIsFetchingLocation(false);
     }
@@ -151,11 +151,11 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
 
   const handleSave = useCallback(async () => {
     if (!title.trim()) {
-      Alert.alert('Błąd walidacji', 'Tytuł notatki nie może być pusty.');
+      Alert.alert('Note Invalid', 'Title cannot be empty.');
       return;
     }
     if (!content.trim()) {
-      Alert.alert('Błąd walidacji', 'Treść notatki nie może być pusta.');
+      Alert.alert('Note invalid', 'Content cannot be empty.');
       return;
     }
 
@@ -170,8 +170,8 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
       }
       navigation.goBack();
     } catch (err: any) {
-      setError(err.message || 'Nie udało się zapisać notatki.');
-      Alert.alert('Błąd zapisu', err.message || 'Wystąpił problem podczas zapisywania notatki.');
+      setError(err.message || 'Unable to save a note.');
+      Alert.alert('Error', err.message || 'An error ocurred during your note creation.');
     } finally {
       setIsSaving(false);
     }
@@ -179,7 +179,7 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
 
 
   if (isNotesContextLoading && isEditing) {
-      return <LoadingIndicator message="Wczytywanie danych notatki..." />;
+      return <LoadingIndicator message="Fetching note data..." />;
   }
 
   return (
@@ -196,18 +196,18 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
         {error && <Text style={[styles.errorText, { color: theme.colors.error }]}>{error}</Text>}
 
         <FormField
-          label="Tytuł"
+          label="Title"
           value={title}
           onChangeText={setTitle}
-          placeholder="Wpisz tytuł notatki..."
+          placeholder="Title of your note..."
           returnKeyType="next"
           editable={!isSaving}
         />
         <FormField
-          label="Treść"
+          label="Content"
           value={content}
           onChangeText={setContent}
-          placeholder="Wpisz treść notatki..."
+          placeholder="Content of your note..."
           multiline
           numberOfLines={10}
           style={styles.contentInput}
@@ -220,12 +220,12 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
           {imageUri && (
             <View style={styles.imagePreviewContainer}>
               <Image source={{ uri: imageUri }} style={styles.imagePreview} />
-              <Button title="Usuń zdjęcie" onPress={handleRemoveImage} variant="danger" style={styles.removeImageButton} />
+              <Button title="Remove image" onPress={handleRemoveImage} variant="danger" style={styles.removeImageButton} />
             </View>
           )}
           <View style={styles.imageButtonsContainer}>
             <Button
-              title="Zrób zdjęcie"
+              title="Take a picture"
               onPress={() => handlePickImage(true)}
               loading={isImageLoading}
               disabled={isSaving}
@@ -233,7 +233,7 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
               style={styles.imageButton}
             />
             <Button
-              title="Wybierz z galerii"
+              title="Image from gallery"
               onPress={() => handlePickImage(false)}
               loading={isImageLoading}
               disabled={isSaving}
@@ -245,7 +245,7 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
 
         <View style={styles.locationContainer}>
           <Button
-            title={location ? "Zaktualizuj Lokalizację" : "Dodaj Lokalizację"}
+            title={location ? "Update location" : "Add location"}
             onPress={handleGetLocation}
             loading={isFetchingLocation}
             disabled={isSaving}
@@ -255,7 +255,7 @@ const [imageUri, setImageUri] = useState<string | undefined>(undefined);
           {location && (
             <Text style={[styles.locationText, { color: theme.colors.secondary }]}>
               Lat: {location.latitude.toFixed(4)}, Lon: {location.longitude.toFixed(4)}
-              {` (z ${new Date(location.timestamp).toLocaleTimeString('pl-PL')})`}
+              {` (from: ${new Date(location.timestamp).toLocaleTimeString('pl-PL')})`}
             </Text>
           )}
         </View>

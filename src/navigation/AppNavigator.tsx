@@ -42,8 +42,8 @@ function MainTabNavigator() {
         headerTintColor: theme.colors.text,
         headerTitleAlign: 'center',
       })}>
-      <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Moje Notatki' }} />
-      <Tab.Screen name="Settings" component={SettingsScreen} options={{ title: 'Ustawienia' }} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'My Notes' }} />
+      <Tab.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
     </Tab.Navigator>
   );
 }

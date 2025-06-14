@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -17,7 +17,7 @@ interface NoteItemProps {
   note: Note;
 }
 
-const NoteItem: React.FC<NoteItemProps> = ({ note }) => {
+const NoteItem = ({ note }: NoteItemProps): JSX.Element => {
   const theme = useAppTheme();
   const navigation = useNavigation<NoteItemNavigationProp>();
   const { removeNote } = useNotes();
@@ -28,18 +28,18 @@ const NoteItem: React.FC<NoteItemProps> = ({ note }) => {
 
   const handleDelete = () => {
     Alert.alert(
-      'Usuń notatkę',
-      'Czy na pewno chcesz usunąć tę notatkę?',
+      'Delete note',
+      'Are you sure you want to delete this note?',
       [
-        { text: 'Anuluj', style: 'cancel' },
+        { text: 'Cancel', style: 'cancel' },
         {
-          text: 'Usuń',
+          text: 'Delete',
           style: 'destructive',
           onPress: async () => {
             try {
               await removeNote(note.id);
             } catch (error) {
-              Alert.alert('Błąd', 'Nie udało się usunąć notatki.');
+              Alert.alert('Error', 'Unable to remove note.');
             }
           },
         },
@@ -63,7 +63,7 @@ const NoteItem: React.FC<NoteItemProps> = ({ note }) => {
           <Image source={{ uri: note.imageUri }} style={styles.thumbnail} />
         )}
         <Text style={[styles.date, { color: theme.colors.secondary }]}>
-          Ostatnia zmiana: {formatDate(new Date(note.updatedAt))}
+          Last change: {formatDate(new Date(note.updatedAt))}
         </Text>
         {note.location && (
           <Text style={[styles.location, { color: theme.colors.secondary }]}>

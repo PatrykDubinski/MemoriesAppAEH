@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSX } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useAppTheme } from '@/styles/theme';
 import Button from './Button';
@@ -8,7 +8,7 @@ interface ErrorDisplayProps {
   onRetry?: () => void;
 }
 
-const ErrorDisplay: React.FC<ErrorDisplayProps> = ({ message, onRetry }) => {
+const ErrorDisplay = ({ message, onRetry }: ErrorDisplayProps): JSX.Element | null => {
   const theme = useAppTheme();
 
   if (!message) {
@@ -18,10 +18,10 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({ message, onRetry }) => {
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.error + '20'}]}>
       <Text style={[styles.messageText, { color: theme.colors.error }]}>
-        Błąd: {message}
+        Error: {message}
       </Text>
       {onRetry && (
-        <Button title="Spróbuj ponownie" onPress={onRetry} variant="danger" />
+        <Button title="Try again" onPress={onRetry} variant="danger" />
       )}
     </View>
   );

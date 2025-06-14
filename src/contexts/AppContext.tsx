@@ -1,6 +1,5 @@
 import React, {
   createContext,
-  useContext,
   useState,
   useMemo,
   ReactNode,
@@ -20,7 +19,7 @@ interface AppContextType {
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 
-export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<ThemeMode>('light');
   const [isThemeLoading, setIsThemeLoading] = useState(true);
 

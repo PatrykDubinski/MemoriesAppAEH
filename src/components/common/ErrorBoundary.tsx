@@ -36,13 +36,13 @@ class ErrorBoundary extends Component<Props, State> {
     if (this.state.hasError) {
       return (
         <View style={styles.container}>
-          <Text style={styles.title}>Coś poszło nie tak.</Text>
+          <Text style={styles.title}>Something went wrong.</Text>
           <Text style={styles.message}>
-            Spróbuj ponownie później.
+            Try again later.
           </Text>
           {__DEV__ && this.state.error && (
             <ScrollView style={styles.detailsContainer}>
-              <Text style={styles.detailsTitle}>Szczegóły błędu (DEV):</Text>
+              <Text style={styles.detailsTitle}>Error Details (DEV):</Text>
               <Text style={styles.detailsText}>{this.state.error.toString()}</Text>
               {this.state.errorInfo && (
                 <Text style={styles.detailsText}>
@@ -51,7 +51,7 @@ class ErrorBoundary extends Component<Props, State> {
               )}
             </ScrollView>
           )}
-          <Button title="Spróbuj ponownie" onPress={this.handleResetError} />
+          <Button title="Try again" onPress={this.handleResetError} />
         </View>
       );
     }

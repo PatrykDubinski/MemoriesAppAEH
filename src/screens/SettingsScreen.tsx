@@ -5,7 +5,6 @@ import { AppContext } from '@/contexts/AppContext'
 import { MainTabScreenProps } from '@/navigation/types';
 import * as PlaceholderService from '@/api/placeholderApiService';
 import Button from '@/components/common/Button';
-import LoadingIndicator from '@/components/common/LoadingIndicator';
 import NetInfo, { NetInfoState } from '@react-native-community/netinfo'
 
 interface SampleTodo {
@@ -38,7 +37,7 @@ export default function SettingsScreen({ navigation }: MainTabScreenProps<'Setti
          const todoData = await PlaceholderService.fetchSampleTodo();
          setSampleTodo({ title: todoData.title, completed: todoData.completed });
        } catch (error: any) {
-         setTodoError(error.message || 'Nie udało się pobrać danych.');
+         setTodoError(error.message || 'Unable to fetch data.');
        } finally {
          setIsLoadingTodo(false);
        }
@@ -48,7 +47,7 @@ export default function SettingsScreen({ navigation }: MainTabScreenProps<'Setti
   const appContext = React.useContext(AppContext);
 
   if (!appContext) {
-    return <Text>Błąd ładowania kontekstu aplikacji.</Text>;
+    return <Text>Error during loading app context.</Text>;
   }
 
   const { theme: currentThemeMode, toggleTheme, isThemeLoading } = appContext;
@@ -57,7 +56,7 @@ export default function SettingsScreen({ navigation }: MainTabScreenProps<'Setti
     <View style={[styles.container, { backgroundColor: themeHook.colors.background }]}>
       <View style={styles.settingItem}>
         <Text style={[styles.settingText, { color: themeHook.colors.text }]}>
-          Tryb Ciemny
+          Dark mode
         </Text>
         <Switch
           trackColor={{ false: themeHook.colors.secondary, true: themeHook.colors.primary }}
@@ -69,25 +68,25 @@ export default function SettingsScreen({ navigation }: MainTabScreenProps<'Setti
         />
       </View>
       <View style={styles.section}>
-              <Text style={[styles.sectionTitle, { color: themeHook.colors.text }]}>Stan Sieci</Text>
+              <Text style={[styles.sectionTitle, { color: themeHook.colors.text }]}>Connection status</Text>
               {networkState ? (
                 <>
-                  <Text style={{ color: themeHook.colors.text }}>Typ połączenia: {networkState.type}</Text>
-                  <Text style={{ color: themeHook.colors.text }}>Połączono: {networkState.isConnected ? 'Tak' : 'Nie'}</Text>
+                  <Text style={{ color: themeHook.colors.text }}>Connection type: {networkState.type}</Text>
+                  <Text style={{ color: themeHook.colors.text }}>Connected: {networkState.isConnected ? 'Yes' : 'No'}</Text>
                   {networkState.isInternetReachable === null ? null : (
-                      <Text style={{ color: themeHook.colors.text }}>Dostęp do Internetu: {networkState.isInternetReachable ? 'Tak' : 'Nie'}</Text>
+                      <Text style={{ color: themeHook.colors.text }}>Access to the Internet: {networkState.isInternetReachable ? 'Yes' : 'No'}</Text>
                   )}
                 </>
               ) : (
-                <Text style={{ color: themeHook.colors.text }}>Sprawdzanie stanu sieci...</Text>
+                <Text style={{ color: themeHook.colors.text }}>Checking your connection status...</Text>
               )}
             </View>
 
 
             <View style={styles.section}>
-              <Text style={[styles.sectionTitle, { color: themeHook.colors.text }]}>Testowe Zapytanie API</Text>
+              <Text style={[styles.sectionTitle, { color: themeHook.colors.text }]}>Sample API request</Text>
               <Button
-                title={isLoadingTodo ? "Pobieranie..." : "Pobierz Dane Testowe"}
+                title={isLoadingTodo ? "Fetching..." : "Fetch sample data"}
                 onPress={handleFetchTodo}
                 loading={isLoadingTodo}
                 disabled={isLoadingTodo || !networkState?.isInternetReachable}
@@ -96,14 +95,14 @@ export default function SettingsScreen({ navigation }: MainTabScreenProps<'Setti
               {todoError && <Text style={[styles.errorText, { color: themeHook.colors.error }]}>{todoError}</Text>}
               {sampleTodo && (
                 <View style={styles.todoContainer}>
-                  <Text style={{ color: themeHook.colors.text, fontWeight: 'bold' }}>Pobrane TODO:</Text>
-                  <Text style={{ color: themeHook.colors.text }}>Tytuł: {sampleTodo.title}</Text>
-                  <Text style={{ color: themeHook.colors.text }}>Ukończone: {sampleTodo.completed ? 'Tak' : 'Nie'}</Text>
+                  <Text style={{ color: themeHook.colors.text, fontWeight: 'bold' }}>Fetched TODO:</Text>
+                  <Text style={{ color: themeHook.colors.text }}>Title: {sampleTodo.title}</Text>
+                  <Text style={{ color: themeHook.colors.text }}>Finished: {sampleTodo.completed ? 'Yes' : 'No'}</Text>
                 </View>
               )}
             </View>
       <Text style={[styles.infoText, {color: themeHook.colors.secondary}]}>
-        Wersja aplikacji: 1.0.0
+        App version: 1.0.0
       </Text>
     </View>
   );
